@@ -47,7 +47,7 @@ describe("<Breadcrumbs />", () => {
                 </MuiThemeProvider>
             </Provider>);
         expect(breadcrumbs.find(Button)).toHaveLength(1);
-        expect(breadcrumbs.find(ChevronRightIcon)).toHaveLength(0);
+        expect(breadcrumbs.find(ChevronRightIcon)).toHaveLength(99);
     });
 
     it("renders multiple items", () => {

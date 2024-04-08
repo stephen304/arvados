@@ -46,6 +46,7 @@ describe("<Breadcrumbs />", () => {
                     <Breadcrumbs items={items} resources={resources} onClick={onClick} onContextMenu={jest.fn()} />
                 </MuiThemeProvider>
             </Provider>);
+            //
         expect(breadcrumbs.find(Button)).toHaveLength(1);
         expect(breadcrumbs.find(ChevronRightIcon)).toHaveLength(0);
     });

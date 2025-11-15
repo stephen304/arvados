@@ -41,6 +41,7 @@ echo "$(id)"
 echo "$(ls -al $ARVADOS_DIRECTORY)"
 echo "$(ls -aln $ARVADOS_DIRECTORY)"
 git config --global --add safe.directory "$ARVADOS_DIRECTORY"
+echo "$(git describe --long)"
 run_setup cmd/arvados-server go install
 run_setup services/workbench2 yarn run cypress install
 run_setup services/workbench2 yarn run cypress verify

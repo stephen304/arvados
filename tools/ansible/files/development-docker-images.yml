@@ -66,6 +66,8 @@ arvados_test_workbench:
     arvados_dev_user: workbench
     arvados_docker_changes:
       - "ENV ARVADOS_DIRECTORY=/opt/arvados"
+      # Timeout workaround to prevent orphaned browser process https://github.com/cypress-io/cypress/issues/28397
+      - "ENV CYPRESS_INTERNAL_BROWSER_CONNECT_TIMEOUT=300000"
       # VENV3DIR gets created by volume setup. The rest of PATH is standard.
       - "ENV PATH=/usr/local/bin:/usr/bin:/usr/sbin:/home/{{ arvados_dev_user }}/VENV3DIR/bin"
       - "USER {{ arvados_dev_user }}"

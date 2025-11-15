@@ -33,8 +33,6 @@ jobs:
           docker-images: false
           # Keep swap to avoid thrashing unless we really need the space
           swap-storage: false
-      - name: Set up Docker
-        uses: docker/setup-docker-action@efe9e3891a4f7307e689f2100b33a155b900a608 # v4.5.0
       - name: Install pipx and dependencies
         run: |
           sudo apt update

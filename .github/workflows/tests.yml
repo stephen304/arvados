@@ -34,29 +34,18 @@ jobs:
           # Keep swap to avoid thrashing unless we really need the space
           swap-storage: false
       - name: Checkout code
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-      - name: Setup buildx
-        uses: docker/setup-buildx-action@d70bba72b1f3fd22344832f00baa16ece964efeb # v3.3.0
-      - name: Build wb2 test container
-        uses: docker/build-push-action@2cdde995de11925a030ce8070c3d77a52ffcf1c0 # v5.3.0
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: Set up Docker
+        uses: docker/setup-docker-action@efe9e3891a4f7307e689f2100b33a155b900a608 # v4.5.0
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          context: .
-          file: "services/workbench2/docker/Dockerfile"
-          tags: workbench2-test:latest
-          load: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          push: false
-      - name: Run wb2 integration tests
-        uses: addnab/docker-run-action@4f65fabd2431ebc8d299f8e5a018d79a769ae185 # v3
-        with:
-          image: workbench2-test:latest
-          # Timeout workaround to prevent orphaned browser process https://github.com/cypress-io/cypress/issues/28397
-          options: >-
-            -v ${{github.workspace}}:/usr/src/arvados
-            -w /usr/src/arvados/services/workbench2
-            --env CYPRESS_INTERNAL_BROWSER_CONNECT_TIMEOUT=300000
-          run: |
-            yarn install
-            yarn test || exit $?
-            tools/run-integration-tests.sh -a /usr/src/arvados
+          python-version: '3.x'
+      - name: Install Ansible
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install ansible
+      - name: Build Docker image with Ansible
+        run: echo $PWD && cd services/workbench2 && make workbench-docker-image
+      - name: Run WB2 integration tests
+        run: echo $PWD && make tests-in-docker

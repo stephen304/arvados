@@ -33,10 +33,12 @@ jobs:
           docker-images: false
           # Keep swap to avoid thrashing unless we really need the space
           swap-storage: false
+      - name: Install pipx and dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y pipx install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
       - name: Checkout code
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - name: Install pipx
-        run: sudo apt install -y pipx
       - name: Install Ansible
         run: tools/ansible/install-ansible.sh
       - name: Run unit and integration tests

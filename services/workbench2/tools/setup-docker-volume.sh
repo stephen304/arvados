@@ -35,6 +35,11 @@ cp --archive . "$DEV_HOME"
 
 # Now install everything else directly to the volume.
 cd "$ARVADOS_DIRECTORY"
+echo "$(pwd)"
+echo "$(whoami)"
+echo "$(id)"
+echo "$(ls -al $ARVADOS_DIRECTORY)"
+echo "$(ls -aln $ARVADOS_DIRECTORY)"
 git config --global --add safe.directory "$ARVADOS_DIRECTORY"
 run_setup cmd/arvados-server go install
 run_setup services/workbench2 yarn run cypress install

@@ -42,4 +42,4 @@ jobs:
       - name: Install Ansible
         run: tools/ansible/install-ansible.sh
       - name: Run tests with Docker image
-        run: echo $PWD && cd services/workbench2 && make tests-in-docker
+        run: echo "$(whoami)" && echo $PWD && echo "$(id)" && cd services/workbench2 && make tests-in-docker

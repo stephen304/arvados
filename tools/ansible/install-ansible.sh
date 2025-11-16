@@ -24,6 +24,7 @@ echo "$(git describe --long)"
 echo "$(git branch)"
 
 git fetch --tags
+git fetch --all
 echo "\n"
 echo "$(git describe --long)"
 echo "$(git branch)"

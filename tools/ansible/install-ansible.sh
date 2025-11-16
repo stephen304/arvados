@@ -15,6 +15,15 @@
 set -e
 set -u
 
+echo "$(pwd)"
+echo "$(whoami)"
+echo "$(id)"
+echo "$(ls -al)"
+echo "$(ls -aln)"
+echo "$(git describe --long)"
+echo "$(git branch)"
+
+
 ANSIBLE_DIR="$(dirname "$0")"
 ANSIBLE_PKG=ansible-core
 EX_UNAVAILABLE=69

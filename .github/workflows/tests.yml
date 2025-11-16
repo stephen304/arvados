@@ -18,11 +18,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
+          fetch-depth: 0
           fetch-tags: true # Needed for go VCS stamping to succeed
       - name: Fetch tags
         run: |
-          git fetch --tags origin
           echo $(git describe --long)
+        # git fetch --tags origin
 
       # Temporarily after checkout
       - name: Free Disk Space (Ubuntu)

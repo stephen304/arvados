@@ -38,6 +38,8 @@ cd "$ARVADOS_DIRECTORY"
 echo "$(pwd)"
 echo "$(whoami)"
 echo "$(id)"
+echo "$(getent passwd $(id -un))"
+echo $HOME
 echo "$(ls -al $ARVADOS_DIRECTORY)"
 echo "$(ls -aln $ARVADOS_DIRECTORY)"
 git config --global --add safe.directory "$ARVADOS_DIRECTORY"

@@ -22,6 +22,7 @@ jobs:
       - name: Fetch tags
         run: |
           git fetch --tags origin
+          echo $(git describe --long)
 
       # Temporarily after checkout
       - name: Free Disk Space (Ubuntu)

@@ -23,6 +23,11 @@ echo "$(ls -aln)"
 echo "$(git describe --long)"
 echo "$(git branch)"
 
+git fetch --tags
+echo "\n"
+echo "$(git describe --long)"
+echo "$(git branch)"
+
 
 ANSIBLE_DIR="$(dirname "$0")"
 ANSIBLE_PKG=ansible-core

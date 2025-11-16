@@ -42,8 +42,10 @@ jobs:
         with:
           fetch-depth: 0 # Needed for go VCS stamping to succeed
           fetch-tags: true
-      - name: Set up git references
-        run: git remote set-head origin --auto
+      - name: Fix actions/checkout quirks
+        run: |
+          git remote set-head origin --auto
+          git fetch --tags --force
       - name: Install Ansible
         run: tools/ansible/install-ansible.sh
       - name: Run tests with Docker image

@@ -15,6 +15,14 @@ jobs:
     name: Workbench2 Tests
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-tags: true # Needed for go VCS stamping to succeed
+        run: |
+          git fetch --tags origin
+
+      # Temporarily after checkout
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
         with:
@@ -37,10 +45,6 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y pipx xvfb
-      - name: Checkout code
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          fetch-tags: true # Needed for go VCS stamping to succeed
       # - name: Fix HOME Directory
       #   shell: bash
       #   run: |

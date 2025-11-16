@@ -42,10 +42,27 @@ jobs:
         with:
           fetch-depth: 0 # Needed for go VCS stamping to succeed
           fetch-tags: true
+      - name: Fix HOME Directory
+        shell: bash
+        run: |
+          # Issue [HOME is overridden for containers](https://github.com/actions/runner/issues/863)
+          h=$(getent passwd $(id -un) | cut -d: -f6)
+          if [ "$h" = "$HOME" ]; then
+            echo "HOME fine: $HOME"
+            exit 0
+          fi
+          echo "HOME=$HOME was broken. Setting it to $h"
+          ls -ld $HOME
+          ls -ld $h
+          echo "USER: $USER"
+          echo "id: $(id)"
+          echo "HOME=$h" >> $GITHUB_ENV
       - name: Fix actions/checkout quirks
         run: |
           git remote set-head origin --auto
           git fetch --tags --force
+          git describe --long
+          git branch
       - name: Install Ansible
         run: tools/ansible/install-ansible.sh
       - name: Run tests with Docker image

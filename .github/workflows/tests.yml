@@ -61,7 +61,6 @@ jobs:
         run: |
           git remote set-head origin --auto
           git fetch --tags --force
-          git describe --long
           git branch
       - name: Install Ansible
         run: tools/ansible/install-ansible.sh

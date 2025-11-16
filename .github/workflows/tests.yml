@@ -60,6 +60,7 @@ jobs:
       - name: Fix actions/checkout quirks
         run: |
           git remote set-head origin --auto
+          git fetch --tags origin
           git fetch --tags --force
           git branch
       - name: Install Ansible
